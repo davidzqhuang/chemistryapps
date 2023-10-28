@@ -15,16 +15,16 @@ export default function App() {
           <Button variant="outline" onClick={() => signOut()}>Sign out</Button>
         </div>
         <div>
-          <a href="/calculator">
+          <a href="/rdkitrender">
             <div className="bg-slate-200 p-4 text-center rounded-md flex flex-col py-2 text-blue-500 hover:underline">
-              Calculator
+              RDKit Render
             </div>
           </a>
         </div>
         <div>
-          <a href="/rdkitrender">
+          <a href="/rdkitmoleculestructure">
             <div className="bg-slate-200 p-4 text-center rounded-md flex flex-col py-2 text-blue-500 hover:underline">
-              RDKit Render
+              RDKit using MoleculeStructure component
             </div>
           </a>
         </div>

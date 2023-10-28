@@ -2,7 +2,10 @@
 
 import { useState } from "react"
 
-import data from "../../../../../logs/api_logs.json"
+let data: any = { entries: [] }
+if (process.env.NODE_ENV === 'development') {
+    data = require("../../../../../logs/api_logs.json")
+}
 
 import JSONPretty from "react-json-pretty"
 import { Textarea } from "@/components/ui/textarea"

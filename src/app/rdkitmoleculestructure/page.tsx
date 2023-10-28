@@ -1,5 +1,6 @@
 'use client'
 
+import MoleculeStructure from "@/components/molui/molecule_structure";
 import { Button } from "@/components/ui/button";
 
 import { useState, useEffect } from "react";
@@ -26,30 +27,21 @@ export default function Page() {
         document.head.appendChild(script);
     }, []);
 
-    const [svg, setSvg] = useState<null | string>(null);
-
-    useEffect(() => {
-        if (rdkit) {
-            const m = rdkit?.get_mol("CN1C=NC2=C1C(=O)N(C(=O)N2C)");
-            setSvg(m.get_svg());
-            m.delete();
-        }
-    }, [rdkit]);
-
     return (
         <main className="flex min-h-screen flex-col items-center justify-between p-24">
             <div className="z-10 max-w-8xl w-full items-center justify-between font-mono text-sm lg:flex flex-col space-y-4">
                 <a href="/">
                     <Button variant="outline">Back to App Tree</Button>
                 </a>
-                <h1 className="text-2xl mb-4">RDKit render SMILES as SVG</h1>
-                {
-                    svg ? (
-                        <div dangerouslySetInnerHTML={{ __html: svg }}></div>
-                      ) : (
-                        <p>Loading RDKit, may take a few seconds...</p>
-                      )
-                }
+                <h1 className="text-2xl mb-4">RDKit render SMILES using MoleculeStructure component</h1>
+                { rdkit ? <MoleculeStructure 
+                    id="mol1" 
+                    rdkit={rdkit} 
+                    structure="CN1C=NC2=C1C(=O)N(C(=O)N2C)" 
+                    svgMode={false}
+                    width={400}
+                    height={400}
+                /> : null}
             </div>
         </main>
     )

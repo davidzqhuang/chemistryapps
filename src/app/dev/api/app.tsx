@@ -29,11 +29,15 @@ type Entry = {
     }
 }
 
-import data from "../../../logs/api_logs.json"
+let apiData: Entry[] = [];
+if (process.env.NODE_ENV === 'development') {
+    const data = require("../../../logs/api_logs.json")
+    apiData = data["entries"].reverse() as Entry[];
+}
+
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
-const apiData = data["entries"].reverse() as Entry[];
 
 const columns: ColumnDef<Entry>[] = [
     {
@@ -159,7 +163,11 @@ export default function App() {
 
     return (
         <div>
-            <DataTable columns={columns} data={apiData} />
+            {
+                process.env.NODE_ENV === 'development' ? (
+                    <DataTable columns={columns} data={apiData} />
+                ) : null
+            }
         </div>
     )
 }
